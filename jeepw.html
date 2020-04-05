@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        canvas {
+            background-color:lawngreen;
+            width: 20%;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -o-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: pixelated;
+        }
+    </style>
+<body>
+    <img id='car0' src=' jeepw/0.png'><img id='car1' src=' jeepw/1.png'><img id='car2' src=' jeepw/2.png'><img id='car3' src=' jeepw/3.png'><img id='car4' src=' jeepw/4.png'><img id='car5' src=' jeepw/5.png'><img id='car6' src=' jeepw/6.png'><img id='car7' src=' jeepw/7.png'><img id='car8' src=' jeepw/8.png'><img id='car9' src=' jeepw/9.png'><img id='car10' src=' jeepw/10.png'><img id='car11' src=' jeepw/11.png'><img id='car12' src=' jeepw/12.png'><img id='car13' src=' jeepw/13.png'><img id='car14' src=' jeepw/14.png'><img id='car15' src=' jeepw/15.png'><img id='car16' src=' jeepw/16.png'><img id='car17' src=' jeepw/17.png'><img id='car18' src=' jeepw/18.png'><img id='car19' src=' jeepw/19.png'><img id='car20' src=' jeepw/20.png'><img id='car21' src=' jeepw/21.png'><img id='car22' src=' jeepw/22.png'><img id='car23' src=' jeepw/23.png'><img id='car24' src=' jeepw/24.png'><img id='car25' src=' jeepw/25.png'><img id='car26' src=' jeepw/26.png'><img id='car27' src=' jeepw/27.png'><img id='car28' src=' jeepw/28.png'><img id='car29' src=' jeepw/29.png'><img id='car30' src=' jeepw/30.png'><img id='car31' src=' jeepw/31.png'><img id='car32' src=' jeepw/32.png'><img id='car33' src=' jeepw/33.png'><img id='car34' src=' jeepw/34.png'><img id='car35' src=' jeepw/35.png'><img id='car36' src=' jeepw/36.png'><img id='car37' src=' jeepw/37.png'><img id='car38' src=' jeepw/38.png'><img id='car39' src=' jeepw/39.png'><img id='car40' src=' jeepw/40.png'><img id='car41' src=' jeepw/41.png'>
+    
+    
+    
+    
+    <canvas id="myCanvas" width="200" height="500" style="border:1px solid #d3d3d3;" onmousemove="epic(1)"></canvas>
+    <p>Antialiasing</p>
+    <button onclick="ctx.mozImageSmoothingEnabled = true;">Enable</button>
+    <button onclick="ctx.mozImageSmoothingEnabled = false;">Disable</button>
+
+    <script>
+        
+                
+        var stringymcstringface = "";
+        for (i = 0; i < 42; i++) {
+            stringymcstringface += "document.getElementById('car" + i + "'),";
+        }
+        
+        
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        //ctx.mozImageSmoothingEnabled = false;
+        var cars = [document.getElementById('car0'),document.getElementById('car1'),document.getElementById('car2'),document.getElementById('car3'),document.getElementById('car4'),document.getElementById('car5'),document.getElementById('car6'),document.getElementById('car7'),document.getElementById('car8'),document.getElementById('car9'),document.getElementById('car10'),document.getElementById('car11'),document.getElementById('car12'),document.getElementById('car13'),document.getElementById('car14'),document.getElementById('car15'),document.getElementById('car16'),document.getElementById('car17'),document.getElementById('car18'),document.getElementById('car19'),document.getElementById('car20'),document.getElementById('car21'),document.getElementById('car22'),document.getElementById('car23'),document.getElementById('car24'),document.getElementById('car25'),document.getElementById('car26'),document.getElementById('car27'),document.getElementById('car28'),document.getElementById('car29'),document.getElementById('car30'),document.getElementById('car31'),document.getElementById('car32'),document.getElementById('car33'),document.getElementById('car34'),document.getElementById('car35'),document.getElementById('car36'),document.getElementById('car37'),document.getElementById('car38'),document.getElementById('car39'),document.getElementById('car40'),document.getElementById('car41')];
+                    
+        var degrees = 0;
+        
+        var i = 0;
+        
+        function epic(bf) {
+            //extras
+            //3d stoof
+            if (i == 0) {
+                ctx.clearRect(0, 0, 200, 500);
+            }
+            
+            //ctx.drawImage(cars[i], 0, 0);
+            
+            
+            //start
+            
+            //save canvas data
+            ctx.save();
+            
+            //set to center of canvas, should probably use different method
+            ctx.translate(100,500-i*16);
+            
+            
+            //flips weapon based on degrees, then rotates weapon by degrees
+            ctx.rotate((90+degrees)*Math.PI/180);
+            
+            //draws weapon (image, hold point x, hold point y)
+            ctx.drawImage(cars[i],-cars[i].width/2,-44);
+            
+            //restore canvas data
+            ctx.restore();
+            
+            //3d stoof
+            i++;
+            if (i == 41) {
+                
+                i = 0;
+            }
+            if (i > 0) {
+                epic();
+            }
+            
+        }
+        
+        
+        c.addEventListener("mousemove", function (evt) { aim(c, evt);}, false);
+        var click_x = 98;
+        var click_y = 98;
+        function aim(canvas, evt) {
+            var rect = c.getBoundingClientRect();
+                
+            click_x = Math.floor((evt.clientX - rect.left)/3.02);
+            click_y = Math.floor((evt.clientY - rect.top)/3.02);
+            
+            var dy = click_y - 100;
+            var dx = click_x - 100;
+            var theta = Math.atan2(dy, dx);
+            degrees = Math.floor(theta *= 180 / Math.PI);
+        }
+        
+    </script>
+</body>
+</html>

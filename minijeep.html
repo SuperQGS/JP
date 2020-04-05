@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        canvas {
+            background-color:lawngreen;
+            width: 20%;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -o-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: pixelated;
+        }
+    </style>
+<body>
+    <img id="rifle" src="trans.png">
+    <img id="rifle2" src="rifle2.png">
+    
+    <img id="car0" src="testcar/0.png">
+    <img id="car1" src="testcar/1.png">
+    <img id="car2" src="testcar/2.png">
+    <img id="car3" src="testcar/3.png">
+    <img id="car4" src="testcar/4.png">
+    <img id="car5" src="testcar/5.png">
+    <img id="car6" src="testcar/6.png">
+    <img id="car7" src="testcar/7.png">
+    <img id="car8" src="testcar/8.png">
+    <img id="car9" src="testcar/9.png">
+    
+    
+    
+    
+    <canvas id="myCanvas" width="100" height="100" style="border:1px solid #d3d3d3;" onmousemove="epic(1)"></canvas>
+    <p>Antialiasing</p>
+    <button onclick="ctx.mozImageSmoothingEnabled = true;">Enable</button>
+    <button onclick="ctx.mozImageSmoothingEnabled = false;">Disable</button>
+
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        //ctx.mozImageSmoothingEnabled = false;
+        var cars = [document.getElementById("car0"),document.getElementById("car1"),document.getElementById("car2"),document.getElementById("car3"),document.getElementById("car4"),document.getElementById("car5"),document.getElementById("car6"),document.getElementById("car7"),document.getElementById("car8"),document.getElementById("car9")];
+                    
+        var degrees = 0;
+        
+        var i = 0;
+        
+        function epic(bf) {
+            //extras
+            //3d stoof
+            if (i == 0) {
+                ctx.clearRect(0, 0, 100, 100);
+            }
+            
+            ctx.drawImage(cars[i], 0, 0);
+            
+            
+            //start
+            
+            //save canvas data
+            ctx.save();
+            
+            //set to center of canvas, should probably use different method
+            ctx.translate(50,50-i);
+            
+            
+            //flips weapon based on degrees, then rotates weapon by degrees
+            ctx.rotate((90+degrees)*Math.PI/180);
+            
+            //draws weapon (image, hold point x, hold point y)
+            ctx.drawImage(cars[i],-cars[i].width/2,-cars[i].height);
+            
+            //restore canvas data
+            ctx.restore();
+            
+            //3d stoof
+            i++;
+            if (i == 10) {
+                
+                i = 0;
+            }
+            if (i > 0) {
+                epic();
+            }
+            
+        }
+        
+        
+        c.addEventListener("mousemove", function (evt) { aim(c, evt);}, false);
+        var click_x = 98;
+        var click_y = 98;
+        function aim(canvas, evt) {
+            var rect = c.getBoundingClientRect();
+                
+            click_x = Math.floor((evt.clientX - rect.left)/3.02);
+            click_y = Math.floor((evt.clientY - rect.top)/3.02);
+            
+            var dy = click_y - 50;
+            var dx = click_x - 50;
+            var theta = Math.atan2(dy, dx);
+            degrees = Math.floor(theta *= 180 / Math.PI);
+        }
+        
+    </script>
+</body>
+</html>

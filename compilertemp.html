@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <style>
+            * {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Force Engine Map Compiler F.E.M.C.</h1>
+        <hr>
+        <button>Load Map</button>
+        <button>Compile Map</button>
+        <p>Top left tile:</p>
+        <p>Bottom right tile:</p>
+        <p>Map size:</p>
+        <p>Tree display:</p>
+        <button>Download Compiled Map</button>
+        
+        <script>
+            var tiles = [1,2,3,4,5,6,7,8,9,10];
+            
+            var temptiles = [];
+            
+            var temptiles2 = [];
+            
+            var comptiles = [];
+            
+            temptiles = tiles;
+            while (temptiles.length-1 > 2) {
+                for (i = 0; i < (temptiles.length-1)/2; i++) {
+                    temptiles2[i] = [temptiles[i],temptiles[i+1]];
+                    alert(temptiles2);
+                }
+            }
+            
+            //notice, array needs to be sorted
+        </script>
+    </body>
+</html>

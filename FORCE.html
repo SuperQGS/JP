@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+    <!--Force Engine v1.0 by qgsoftware.net-->
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            text-align: center;
+            background-color: #000033;
+        }
+        canvas {
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -o-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: pixelated;
+            height: 97vh;
+        }
+        #images {
+            display: none;
+        }
+    </style>
+    <body>
+        <canvas id='game'></canvas>
+        <div id="images">
+            <!--PASTE IMAGE TAGS UNDER HERE-->
+            <img src=images/devtex/dev1.bmp id=dev1>
+            <img src=images/devtex/dev2.bmp id=dev2>
+            <img src=images/devtex/white.bmp id=white>
+            <img src=images/devtex/blue.bmp id=blue>
+            <img src=images/devtex/logo.bmp id=logo>
+            <img src=images/devtex/qgs2.bmp id=qgs2>
+            <img src=images/devtex/green.bmp id=green>
+            <img src=images/devtex/red.bmp id=red>
+            <img src=images/devtex/pink.bmp id=pink>
+            <img src=images/devtex/brown.bmp id=brown>
+            <img src="images/devtex/dev_player.bmp" id=dev_player>
+            <img src="images/devtex/dev_entity.bmp" id=dev_entity>
+            <img src="images/devtex/dev_item.bmp" id=dev_item>
+            <img src="images/devtex/missingno.bmp" id=missingno>
+            
+            <img src="images/goldtest/button0.png" id=button0>
+            <img src="images/goldtest/button1.png" id=button1>
+            <img src="images/goldtest/lever0.png" id=lever0>
+            <img src="images/goldtest/lever1.png" id=lever1>
+            <img src="images/goldtest/door0.png" id=door0>
+            <img src="images/goldtest/door1.png" id=door1>
+            
+            <img src="images/goldtest/wire_hor.png" id="wire_hor">
+            <img src="images/goldtest/wire_vert.png" id="wire_vert">
+            <img src="images/goldtest/wire_c_tl.png" id="wire_c_tl">
+            <img src="images/goldtest/wire_c_tr.png" id="wire_c_tr">
+            <img src="images/goldtest/wire_c_bl.png" id="wire_c_bl">
+            <img src="images/goldtest/wire_c_br.png" id="wire_c_br">
+            
+            <img src="images/goldtest/dark.png" id="dark">
+            <img src="images/goldtest/darkX5.png" id="darkX5">
+            <img src="images/goldtest/darkX10.png" id="darkX10">
+            
+            <img src=images/cibola/wf/brickFloor.png id=brickFloor><img src=images/cibola/wf/bricks.png id=bricks><img src=images/cibola/wf/bricks2.png id=bricks2><img src=images/cibola/wf/bricksCorNE.png id=bricksCorNE><img src=images/cibola/wf/bricksCorNW.png id=bricksCorNW><img src=images/cibola/wf/bricksCorSE.png id=bricksCorSE><img src=images/cibola/wf/bricksCorSW.png id=bricksCorSW><img src=images/cibola/wf/bricksEdgeE.png id=bricksEdgeE><img src=images/cibola/wf/bricksEdgeN.png id=bricksEdgeN><img src=images/cibola/wf/bricksEdgeNE.png id=bricksEdgeNE><img src=images/cibola/wf/bricksEdgeNW.png id=bricksEdgeNW><img src=images/cibola/wf/bricksEdgeS.png id=bricksEdgeS><img src=images/cibola/wf/bricksEdgeSE.png id=bricksEdgeSE><img src=images/cibola/wf/bricksEdgeSW.png id=bricksEdgeSW><img src=images/cibola/wf/bricksEdgeW.png id=bricksEdgeW><img src=images/cibola/wf/bricksVines.png id=bricksVines><img src=images/cibola/wf/conCorNE.png id=conCorNE><img src=images/cibola/wf/conCorNW.png id=conCorNW><img src=images/cibola/wf/conCorSE.png id=conCorSE><img src=images/cibola/wf/conCorSW.png id=conCorSW><img src=images/cibola/wf/concrete.png id=concrete><img src=images/cibola/wf/concrete2.png id=concrete2><img src=images/cibola/wf/concreteBrickWall.png id=concreteBrickWall><img src=images/cibola/wf/concreteVines.png id=concreteVines><img src=images/cibola/wf/concreteWall.png id=concreteWall><img src=images/cibola/wf/concreteWallTop.png id=concreteWallTop><img src=images/cibola/wf/conEdgeE.png id=conEdgeE><img src=images/cibola/wf/conEdgeN.png id=conEdgeN><img src=images/cibola/wf/conEdgeNE.png id=conEdgeNE><img src=images/cibola/wf/conEdgeNW.png id=conEdgeNW><img src=images/cibola/wf/conEdgeS.png id=conEdgeS><img src=images/cibola/wf/conEdgeSE.png id=conEdgeSE><img src=images/cibola/wf/conEdgeSW.png id=conEdgeSW><img src=images/cibola/wf/conEdgeW.png id=conEdgeW><img src=images/cibola/wf/crackedStoneWall.png id=crackedStoneWall><img src=images/cibola/wf/crackedStoneWall2.png id=crackedStoneWall2><img src=images/cibola/wf/crackedStoneWallTop.png id=crackedStoneWallTop><img src=images/cibola/wf/mossBrickWall.png id=mossBrickWall><img src=images/cibola/wf/mossCorNE.png id=mossCorNE><img src=images/cibola/wf/mossCorNW.png id=mossCorNW><img src=images/cibola/wf/mossCorSE.png id=mossCorSE><img src=images/cibola/wf/mossCorSW.png id=mossCorSW><img src=images/cibola/wf/mossEdgeE.png id=mossEdgeE><img src=images/cibola/wf/mossEdgeN.png id=mossEdgeN><img src=images/cibola/wf/mossEdgeNE.png id=mossEdgeNE><img src=images/cibola/wf/mossEdgeNW.png id=mossEdgeNW><img src=images/cibola/wf/mossEdgeS.png id=mossEdgeS><img src=images/cibola/wf/mossEdgeSE.png id=mossEdgeSE><img src=images/cibola/wf/mossEdgeSW.png id=mossEdgeSW><img src=images/cibola/wf/mossEdgeW.png id=mossEdgeW><img src=images/cibola/wf/mossVines.png id=mossVines><img src=images/cibola/wf/mossWall.png id=mossWall><img src=images/cibola/wf/mossWallTop.png id=mossWallTop><img src=images/cibola/wf/stoneCorNE.png id=stoneCorNE><img src=images/cibola/wf/stoneCorNW.png id=stoneCorNW><img src=images/cibola/wf/stoneCorSE.png id=stoneCorSE><img src=images/cibola/wf/stoneEdgeE.png id=stoneEdgeE><img src=images/cibola/wf/stoneEdgeN.png id=stoneEdgeN><img src=images/cibola/wf/stoneEdgeNE.png id=stoneEdgeNE><img src=images/cibola/wf/stoneEdgeNW.png id=stoneEdgeNW><img src=images/cibola/wf/stoneEdgeS.png id=stoneEdgeS><img src=images/cibola/wf/stoneEdgeSE.png id=stoneEdgeSE><img src=images/cibola/wf/stoneEdgeSW.png id=stoneEdgeSW><img src=images/cibola/wf/stoneEdgeW.png id=stoneEdgeW><img src=images/cibola/wf/stoneFloor.png id=stoneFloor><img src=images/cibola/wf/stoneVines.png id=stoneVines><img src=images/cibola/wf/stoneVines2.png id=stoneVines2><img src=images/cibola/wf/stoneWall.png id=stoneWall><img src=images/cibola/wf/stoneWallTop.png id=stoneWallTop><img src=images/cibola/ext/dirt.png id=dirt><img src=images/cibola/ext/dirtE.png id=dirtE><img src=images/cibola/ext/dirtN.png id=dirtN><img src=images/cibola/ext/dirtNE.png id=dirtNE><img src=images/cibola/ext/dirtNW.png id=dirtNW><img src=images/cibola/ext/dirtS.png id=dirtS><img src=images/cibola/ext/dirtSE.png id=dirtSE><img src=images/cibola/ext/dirtSW.png id=dirtSW><img src=images/cibola/ext/dirtW.png id=dirtW><img src=images/cibola/ext/grass.png id=grass><img src=images/cibola/ext/grass2.png id=grass2><img src=images/cibola/ext/grass3.png id=grass3><img src=images/cibola/ext/grass4.png id=grass4><img src=images/cibola/ext/sapling.png id=sapling><img src=images/cibola/ext/shrub.png id=shrub><img src=images/cibola/ext/tree.png id=tree><img src=images/cibola/dec/altar.png id=altar><img src=images/cibola/dec/coffin.png id=coffin><img src=images/cibola/dec/lightE.png id=lightE><img src=images/cibola/dec/lightN.png id=lightN><img src=images/cibola/dec/lightS.png id=lightS><img src=images/cibola/dec/lightStand.png id=lightStand><img src=images/cibola/dec/lightW.png id=lightW><img src=images/cibola/dec/pillar.png id=pillar><img src=images/cibola/dec/pillar2.png id=pillar2><img src=images/cibola/dec/pillar2Arch.png id=pillar2Arch><img src=images/cibola/dec/pillar2ArchE.png id=pillar2ArchE><img src=images/cibola/dec/pillar2ArchFork.png id=pillar2ArchFork><img src=images/cibola/dec/pillar2ArchW.png id=pillar2ArchW><img src=images/cibola/dec/pillar2Base.png id=pillar2Base><img src=images/cibola/dec/pillar2BaseCracked.png id=pillar2BaseCracked><img src=images/cibola/dec/pillar2Cracked.png id=pillar2Cracked><img src=images/cibola/dec/pillarArch.png id=pillarArch><img src=images/cibola/dec/pillarArchCrackedE.png id=pillarArchCrackedE><img src=images/cibola/dec/pillarArchFork.png id=pillarArchFork><img src=images/cibola/dec/pillarArchW.png id=pillarArchW><img src=images/cibola/dec/pillarBase.png id=pillarBase><img src=images/cibola/dec/pillarBaseCracked.png id=pillarBaseCracked><img src=images/cibola/dec/pillarCracked.png id=pillarCracked><img src=images/cibola/dec/statue.png id=statue><img src=images/cibola/dec/statue2.png id=statue2><img src=images/cibola/dec/statue3.png id=statue3><img src=images/cibola/light/dark.png id=dark><img src=images/cibola/light/darkX5.png id=darkX5><img src=images/cibola/puz/button.png id=button><img src=images/cibola/puz/button2.png id=button2><img src=images/cibola/puz/button2Press.png id=button2Press><img src=images/cibola/puz/buttonPress.png id=buttonPress><img src=images/cibola/puz/EWdoor2Closed.png id=EWdoor2Closed><img src=images/cibola/puz/EWdoor2Open.png id=EWdoor2Open><img src=images/cibola/puz/EWdoorClosed.png id=EWdoorClosed><img src=images/cibola/puz/EWdoorOpen.png id=EWdoorOpen><img src=images/cibola/puz/NSdoor2Closed.png id=NSdoor2Closed><img src=images/cibola/puz/NSdoor2Open.png id=NSdoor2Open><img src=images/cibola/puz/NSdoorClosed.png id=NSdoorClosed><img src=images/cibola/puz/NSdoorOpen.png id=NSdoorOpen><img src=images/cibola/puz/rock.png id=rock><img src=images/cibola/puz/rock2.png id=rock2><img src=images/cibola/puz/rock3.png id=rock3><img src=images/cibola/puz/switch.png id=switch><img src=images/cibola/puz/switch2.png id=switch2><img src=images/cibola/puz/switch2Press.png id=switch2Press><img src=images/cibola/puz/switchPress.png id=switchPress><img src=images/cibola/puz/wireEN.png id=wireEN><img src=images/cibola/puz/wireES.png id=wireES><img src=images/cibola/puz/wireEW.png id=wireEW><img src=images/cibola/puz/wireEWN.png id=wireEWN><img src=images/cibola/puz/wireNES.png id=wireNES><img src=images/cibola/puz/wireNEW.png id=wireNEW><img src=images/cibola/puz/wireNWS.png id=wireNWS><img src=images/cibola/puz/wireWN.png id=wireWN><img src=images/cibola/puz/wireWS.png id=wireWS><img src=images/cibola/puz/wireNS.png id=wireNS><img src=images/cibola/puz/wireNSEW.png id=wireNSEW><img src=images/cibola/player/East1.png id=East1><img src=images/cibola/player/East2.png id=East2><img src=images/cibola/player/East3.png id=East3><img src=images/cibola/player/East4.png id=East4><img src=images/cibola/player/Idle1.png id=Idle1><img src=images/cibola/player/Idle2.png id=Idle2><img src=images/cibola/player/Idle3.png id=Idle3><img src=images/cibola/player/North1.png id=North1><img src=images/cibola/player/North2.png id=North2><img src=images/cibola/player/North3.png id=North3><img src=images/cibola/player/North4.png id=North4><img src=images/cibola/player/South1.png id=South1><img src=images/cibola/player/South2.png id=South2><img src=images/cibola/player/South3.png id=South3><img src=images/cibola/player/South4.png id=South4><img src=images/cibola/player/West1.png id=West1><img src=images/cibola/player/West2.png id=West2><img src=images/cibola/player/West3.png id=West3><img src=images/cibola/player/West4.png id=West4><img src=images/cibola/light/clip.png id=clip>
+            
+            <img id=rifle src="rifle.png">
+        </div>
+        <button onclick="epic()">></button>
+        <script>
+            //config
+            var canvas_name = "game";
+            var texture_dimensions = 16;
+            var grid_height = 160;
+            var grid_width = 320;
+                        
+            //get canvas info
+            var canvas = document.getElementById(canvas_name);
+            var ctx = canvas.getContext("2d");
+            ctx.translate(canvas.width / 2,canvas.height / 2);
+            document.getElementById(canvas_name).width = grid_width;
+            document.getElementById(canvas_name).height = grid_height;
+            
+            //camera
+            var camera = {x:0, y:0};
+            
+            //tiles
+            var tiles = [[]];
+            
+            //------functions-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            
+            
+            
+            
+            //TICK FUNCTION
+            var start_tick = 0;
+            var tick = 1;
+            function real_time_tick() {
+                if (start_tick == 0) {
+                    start_tick = Date.now();
+                }
+                tick = Date.now() - start_tick;
+            }
+            
+            
+            
+            
+            function executer(func, ticks, multiplier) {
+                var second_tick = tick - multiplier;
+                while (second_tick > ticks) {
+                    second_tick = second_tick - ticks;
+                    multiplier = tick;
+                    func(multiplier);
+                }
+            }
+            
+            //guntest!!!
+            var imgun = document.getElementById("rifle");
+            var degrees = 0;
+            
+            //RENDER FUNCTION
+            var change_tile;
+            function render() {
+                //render tiles
+                
+                var layer;
+                var tile;
+                for (layer = 0; layer < tiles.length; layer++) {
+                    if (tiles[layer].vis) {
+                        for (tile = 0; tile < tiles[layer].length; tile++) {
+                            change_tile = tiles[layer][tile];
+                            adjust();
+                        }
+                        
+                    }
+                }
+                
+                ctx.mozImageSmoothingEnabled = false;
+                ctx.save();
+                ctx.translate(canvas.width/2+6,canvas.height/2+20);
+                ctx.rotate(degrees*Math.PI/180);
+                ctx.drawImage(imgun,-7,-imgun.height/2);
+                ctx.restore();
+            }
+            
+            
+            //epic!!!
+            function epic() {
+                degrees++;
+            }
+            
+            
+            
+            //ADJUST FUNCTION
+            //NOTE: attributes of each tile are
+            //x:
+            //y:
+            //type:
+            //image:
+            //image_string:
+            //attributes.xyz:
+            function adjust() {
+                //your code goes here
+                
+                
+                
+                
+                //this is the line that finally renders the tile
+                ctx.drawImage(change_tile.image, change_tile.x + grid_width/2 - camera.x, change_tile.y + grid_height/2 - camera.y);
+            }
+            
+            
+            
+            
+            //CYCLE FUNCTION
+            window.setInterval(function(){ cycle(); }, 0);
+            function cycle() {
+                //get tick
+                real_time_tick();
+                
+                gamephys();
+                
+                //example
+                executer(execute2, 100, execute2mult);
+                executer(execute, 10, executemult);
+                
+                executer(move, 15, movemult);
+                
+                camera.x = tiles[1][0].x;
+                camera.y = tiles[1][0].y;
+                
+                targetsignal();
+                switchimage();
+                
+                //render tiles
+                render();
+            }
+            
+            
+            
+            
+            //-----included extras-------------------------------------------------------------------------------------
+            
+            //BIND FUNCTION
+            var up = false;
+            var left = false;
+            var down = false;
+            var right = false;
+            var space = false;
+            
+            window.addEventListener("keydown", downbinds, false);
+            window.addEventListener("keyup", upbinds, false);
+            function upbinds(u){binds(u,"")};
+            function downbinds(d){binds("",d)};
+            
+            function binds(u,d) {
+                //example
+                //W
+                if (u.keyCode == "87" || u.keyCode == "38") {
+                    up = false;
+                } else if (d.keyCode == "87" || d.keyCode == "38") {
+                    up = true;
+                }
+                //A
+                if (u.keyCode == "65" || u.keyCode == "37") {
+                    left = false;
+                } else if (d.keyCode == "65" || d.keyCode == "37") {
+                    left = true;
+                }
+                //D
+                if (u.keyCode == "68" || u.keyCode == "39") {
+                    right = false;
+                } else if (d.keyCode == "68" || d.keyCode == "39") {
+                    right = true;
+                }
+                //S
+                if (u.keyCode == "83" || u.keyCode == "40") {
+                    down = false;
+                } else if (d.keyCode == "83" || d.keyCode == "40") {
+                    down = true;
+                }
+                //S
+                if (u.keyCode == "32") {
+                    space = false;
+                } else if (d.keyCode == "32") {
+                    space = true;
+                    //playaudio(nyan);
+                }
+                
+            
+            }
+            
+            
+            
+            
+            //COLLISION FUNCTION
+            function collision(tile1, tile2, xdir, ydir) {
+                //to make custom hitboxes, change texture_dimensions to some kind of .width
+                if (tile2.x < tile1.x + texture_dimensions + xdir && tile2.x + texture_dimensions > tile1.x + xdir && tile2.y < tile1.y + texture_dimensions + ydir && tile2.y + texture_dimensions > tile1.y + ydir) {
+                    if (tile1 != tile2) {
+                        return true;
+                    }
+                    
+                }
+            }
+            
+            
+            
+            //LOAD MAP FUNCTION
+            function load_level(lvlstring) {
+                var head = document.getElementsByTagName('head')[0];
+                var script = document.createElement('script');
+                script.src = "maps/" + lvlstring + ".js";
+                script.id = lvlstring;
+                head.appendChild(script);
+            }
+            
+            //--------------homebrew-------------------------------------------------------------------------------
+            
+            //example
+            
+            var executemult = 0;
+            function execute(newmult) {
+                executemult = newmult;
+                
+                
+            }
+            
+            var execute2mult = 0;
+            function execute2(newmult) {
+                execute2mult = newmult;
+                
+            }
+            
+            var execute3mult = 0;
+            function execute3(newmult) {
+                execute3mult = newmult;
+                
+                //console.log("yolo3");
+            }
+            
+            var movemult = 0;
+            function move(newmult) {
+                movemult = newmult;
+                
+                if (up && canmove(0, -1)) {
+                    tiles[1][0].y -= 1;
+                    playaudio(step);
+                }
+                
+                if (left && canmove(-1, 0)) {
+                    tiles[1][0].x -= 1;
+                    playaudio(step);
+                }
+                
+                if (down && canmove(0, 1)) {
+                    tiles[1][0].y += 1;
+                    playaudio(step);
+                } else {
+                    portal(down, 0, 1);
+                }
+                
+                if (right && canmove(1, 0)) {
+                    tiles[1][0].x += 1;
+                    playaudio(step);
+                } else {
+                    portal(right, 1, 0);
+                }
+            }
+            
+            //!!!
+            function portal(dir, num1, num2) {
+                for (i = 0; i < 8; i++) {
+                    if (num1 != 0) {
+                        if (dir && !down && !up && canmove(1, 0+i)) {
+                            tiles[1][0].y += 1;
+                            return;
+                        } else if (dir && !down && !up && canmove(1, 0-i)) {
+                            tiles[1][0].y -= 1;
+                            return;  
+                        }    
+                    } else {
+                        if (dir && !right && !left && canmove(0+i, 1)) {
+                            tiles[1][0].x += 1;
+                            return;
+                        } else if (dir && !right && !left && canmove(0-i, 1)) {
+                            tiles[1][0].x -= 1;
+                            return;  
+                        } 
+                    }
+                    
+                    
+                }
+            }
+            
+            
+            //!!!
+            function clippingcollision(tile1, layer, xdir, ydir) {
+                
+                for (tile = 0; tile < tiles[layer].length; tile++) {
+                    var test_tile = tiles[layer][tile];
+                    
+                    if (!collision(tile1, test_tile, xdir, ydir) && test_tile.type != "player") {
+
+                    } else {
+                        return true;
+                    }
+                    
+                }
+            }
+            
+            
+            //!!!
+            function gamecollision(tile1, layer, xdir, ydir) {
+                
+                for (tile = 0; tile < tiles[layer].length; tile++) {
+                    var test_tile = tiles[layer][tile];
+                    
+                    if (!collision(tile1, test_tile, xdir, ydir)) {
+                        
+                    } else {
+                        //door collision
+                        if (test_tile.type == "door" && test_tile.attributes.toggle == 0) {
+                            return true;
+                        }
+                        
+                        
+                        
+                        //pushable collision
+                        if (test_tile.type == "pushable") {
+                            
+                            //clipping collision
+                            if (clippingcollision(test_tile, 2, xdir, ydir)) {
+                                return true;
+                            }
+                            
+                            if (gamecollision(test_tile, 1, xdir, ydir)) {
+                                return true;
+                            } else if (clippingcollision(test_tile, 1, xdir, ydir)) {
+                                test_tile.x += xdir;
+                                test_tile.y += ydir;
+                                playaudio(push);
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                    if (!collision(tile1, test_tile, -xdir, -ydir)) {
+                        
+                    } else if (space) {
+                        
+                        //pushable collision
+                        if (test_tile.type == "pushable" && tile1.type == "player") {
+                            
+                            //clipping collision
+                            if (clippingcollision(test_tile, 2, xdir, ydir)) {
+                                return true;
+                            }
+                            
+                            if (gamecollision(test_tile, 1, xdir, ydir) && gamecollision(0, 1, xdir, ydir)) {
+                                return true;
+                            } else if (clippingcollision(test_tile, 1, xdir, ydir)) {
+                                test_tile.x += xdir;
+                                test_tile.y += ydir;
+                                playaudio(push);
+                                return 0;
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                }
+                    
+            }
+            
+            
+            
+            
+            
+            
+            function canmove(xdir, ydir) {
+                if (clippingcollision(tiles[1][0], 2, xdir, ydir)) {
+                    return false;
+                }
+                
+                if (gamecollision(tiles[1][0], 1, xdir, ydir)) {
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function targetsignal() {
+                for (tile = 0; tile < tiles[1].length; tile++) {
+                    var test_tile = tiles[1][tile];
+                    //console.log(tile);
+                    
+                    if (test_tile.attributes.neededsignal != null && test_tile.attributes.neededsignal != "" && test_tile.attributes.neededsignal != 0) {
+                        //console.log(test_tile.attributes.id);
+                        
+                        test_tile.attributes.signal = 0;
+                        test_tile.attributes.neededsignal = parseFloat(test_tile.attributes.neededsignal);
+                        
+                        for (tile2 = 0; tile2 < tiles[1].length; tile2++) {
+                            var test_tile2 = tiles[1][tile2];
+                            
+                            if (test_tile2.attributes.target == test_tile.attributes.id && test_tile2.attributes.toggle == 1) {
+                                
+                                test_tile.attributes.signal += 1;
+                            
+                            }
+                        }
+                        
+                        if (parseFloat(test_tile.attributes.neededsignal) <= parseFloat(test_tile.attributes.signal)) {
+                            test_tile.attributes.toggle = 1;
+                        } else {
+                            test_tile.attributes.toggle = 0;
+                            
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+            
+            function gamephys() {
+                for (tile = 0; tile < tiles[1].length; tile++) {
+                    var test_tile = tiles[1][tile];
+                    
+                    if (test_tile.attributes.toggle == 1 && test_tile.type == "button") {
+                        test_tile.attributes.toggle = 0;
+                    }
+                    
+
+                    
+                    for (tile2 = 0; tile2 < tiles[1].length; tile2++) {
+                        var test_tile2 = tiles[1][tile2];
+                        
+                        if (collision(test_tile, test_tile2, 0, 0)) {
+                            
+                            //pushable to button collision
+                            if (test_tile.type == "button" && (test_tile2.type == "pushable" || test_tile2.type == "player")) {
+                                test_tile.attributes.toggle = 1;
+                            }
+                                
+                            //pushable to lever collision
+                            if (test_tile.type == "lever" && test_tile.attributes.colliding != true && (test_tile2.type == "pushable" || test_tile2.type == "player")) {
+                                
+                                test_tile.attributes.colliding = true;
+                                test_tile.attributes.collider = tile2;
+                                
+                                if (test_tile.attributes.toggle == 1) {
+                                    test_tile.attributes.toggle = 0;
+                                } else if (test_tile.attributes.toggle == 0) {
+                                    test_tile.attributes.toggle = 1;
+                                }
+                                
+                            }
+                            
+                            
+                        } else {
+                            if (test_tile.type == "lever" && (tile2 == test_tile.attributes.collider)) {
+                                test_tile.attributes.colliding = false;
+                            }
+                            
+                        }
+                    
+                    }
+                }
+                
+            }
+            
+            function switchimage() {
+                
+                for (tile = 0; tile < tiles[1].length; tile++) {
+                    
+                    if (tiles[1][tile].image == door0 && tiles[1][tile].attributes.toggle == 1) {
+                        playaudio(doorclose);
+                        tiles[1][tile].image = door1;
+                    }
+                    if (tiles[1][tile].image == door1 && tiles[1][tile].attributes.toggle == 0) {
+                        playaudio(dooropen);
+                        tiles[1][tile].image = door0;
+                    }
+                    if (tiles[1][tile].image == button0 && tiles[1][tile].attributes.toggle == 1) {
+                        playaudio(buttonon);
+                        tiles[1][tile].image = button1;
+                    }
+                    if (tiles[1][tile].image == button1 && tiles[1][tile].attributes.toggle == 0) {
+                        playaudio(buttonoff);
+                        tiles[1][tile].image = button0;
+                    }
+                    if (tiles[1][tile].image == lever0 && tiles[1][tile].attributes.toggle == 1) {
+                        tiles[1][tile].image = lever1;
+                    }
+                    if (tiles[1][tile].image == lever1 && tiles[1][tile].attributes.toggle == 0) {
+                        tiles[1][tile].image = lever0;
+                    }
+                }
+            }
+            
+            function softlaunch() {
+                eval(localStorage.getItem("softlaunch"));
+            }
+            
+            
+            softlaunch();
+            
+            //load_level("compiled");
+            
+            //todo
+            
+            
+            
+            //epic audio system
+            var nyan = new Audio('testsounds/nyan.mp3');
+            var dooropen = new Audio('testsounds/dr1_end.WAV');
+            var doorclose = new Audio('testsounds/dr1_strt.WAV');
+            var buttonon = new Audio('testsounds/menu1.WAV');
+            var buttonoff = new Audio('testsounds/menu3.WAV');
+            var step = new Audio('testsounds/step1.WAV');
+            var push = new Audio('testsounds/tim_pump.WAV')
+            
+            function playaudio(audio) {
+                audio.play();
+            }
+            
+        </script>
+    </body>
+</html>
