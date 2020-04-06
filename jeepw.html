@@ -3,7 +3,7 @@
     <style>
         canvas {
             background-color:lawngreen;
-            width: 20%;
+            width:40%;
             image-rendering: -moz-crisp-edges;
             image-rendering: -o-crisp-edges;
             image-rendering: -webkit-optimize-contrast;
@@ -16,7 +16,7 @@
     
     
     
-    <canvas id="myCanvas" width="200" height="500" style="border:1px solid #d3d3d3;" onmousemove="epic(1)"></canvas>
+    <canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;" onmousemove="epic(1)"></canvas>
     <p>Antialiasing</p>
     <button onclick="ctx.mozImageSmoothingEnabled = true;">Enable</button>
     <button onclick="ctx.mozImageSmoothingEnabled = false;">Disable</button>
@@ -43,7 +43,7 @@
             //extras
             //3d stoof
             if (i == 0) {
-                ctx.clearRect(0, 0, 200, 500);
+                ctx.clearRect(0, 0, 200, 200);
             }
             
             //ctx.drawImage(cars[i], 0, 0);
@@ -55,7 +55,7 @@
             ctx.save();
             
             //set to center of canvas, should probably use different method
-            ctx.translate(100,500-i*16);
+            ctx.translate(100,100-i);
             
             
             //flips weapon based on degrees, then rotates weapon by degrees
@@ -85,9 +85,13 @@
         var click_y = 98;
         function aim(canvas, evt) {
             var rect = c.getBoundingClientRect();
-                
-            click_x = Math.floor((evt.clientX - rect.left)/3.02);
-            click_y = Math.floor((evt.clientY - rect.top)/3.02);
+            
+            //3.75 is 750x200. 200 is from the intended resolution, 750 is the unintended resolution
+            var dividifier = rect.width/200;
+            
+            click_x = Math.floor((evt.clientX - rect.left)/dividifier);
+            click_y = Math.floor((evt.clientY - rect.top)/dividifier);
+            //console.log(rect.width + "," + click_y);
             
             var dy = click_y - 100;
             var dx = click_x - 100;
