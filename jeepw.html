@@ -16,7 +16,7 @@
     
     
     
-    <canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;" onmousemove="epic(1)"></canvas>
+    <canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
     <p>Antialiasing</p>
     <button onclick="ctx.mozImageSmoothingEnabled = true;">Enable</button>
     <button onclick="ctx.mozImageSmoothingEnabled = false;">Disable</button>
@@ -39,7 +39,8 @@
         
         var i = 0;
         
-        function epic(bf) {
+        
+        function epic() {
             //extras
             //3d stoof
             if (i == 0) {
@@ -97,7 +98,10 @@
             var dx = click_x - 100;
             var theta = Math.atan2(dy, dx);
             degrees = Math.floor(theta *= 180 / Math.PI);
+            
+            epic();
         }
+        
         
     </script>
 </body>
