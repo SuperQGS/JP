@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <style>
+    <head>
+        <title>QGS Model Viewer</title>
+        <style>
         canvas {
             background-color:lawngreen;
             width:40%;
@@ -9,18 +11,34 @@
             image-rendering: -webkit-optimize-contrast;
             image-rendering: pixelated;
         }
+        
+        .g {
+            background-color: gray;
+        }
     </style>
+    </head>
+    
 <body>
-    <img id='car0' src=' jeepw/0.png'><img id='car1' src=' jeepw/1.png'><img id='car2' src=' jeepw/2.png'><img id='car3' src=' jeepw/3.png'><img id='car4' src=' jeepw/4.png'><img id='car5' src=' jeepw/5.png'><img id='car6' src=' jeepw/6.png'><img id='car7' src=' jeepw/7.png'><img id='car8' src=' jeepw/8.png'><img id='car9' src=' jeepw/9.png'><img id='car10' src=' jeepw/10.png'><img id='car11' src=' jeepw/11.png'><img id='car12' src=' jeepw/12.png'><img id='car13' src=' jeepw/13.png'><img id='car14' src=' jeepw/14.png'><img id='car15' src=' jeepw/15.png'><img id='car16' src=' jeepw/16.png'><img id='car17' src=' jeepw/17.png'><img id='car18' src=' jeepw/18.png'><img id='car19' src=' jeepw/19.png'><img id='car20' src=' jeepw/20.png'><img id='car21' src=' jeepw/21.png'><img id='car22' src=' jeepw/22.png'><img id='car23' src=' jeepw/23.png'><img id='car24' src=' jeepw/24.png'><img id='car25' src=' jeepw/25.png'><img id='car26' src=' jeepw/26.png'><img id='car27' src=' jeepw/27.png'><img id='car28' src=' jeepw/28.png'><img id='car29' src=' jeepw/29.png'><img id='car30' src=' jeepw/30.png'><img id='car31' src=' jeepw/31.png'><img id='car32' src=' jeepw/32.png'><img id='car33' src=' jeepw/33.png'><img id='car34' src=' jeepw/34.png'><img id='car35' src=' jeepw/35.png'><img id='car36' src=' jeepw/36.png'><img id='car37' src=' jeepw/37.png'><img id='car38' src=' jeepw/38.png'><img id='car39' src=' jeepw/39.png'><img id='car40' src=' jeepw/40.png'><img id='car41' src=' jeepw/41.png'>
-    
-    <img id='ned' src="ned.png">
-    
+    <div class="g">
+        Antialiasing<button onclick="smooth()">Enable</button><button onclick="nosmooth()">Disable</button>
+        <br>
+        Stretch value:<input id="height" value="1">
+        <br>
+        Layers: <input type="range" min="1" max="42" value="42" id="range">
+    </div>
     
     <canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
-    <p>Antialiasing</p>
-    <button onclick="smooth()">Enable</button>
-    <button onclick="nosmooth()">Disable</button>
-    <input id="height" value="1">
+    <br>
+    <div class='g'>
+        <img id='car0' src=' jeepw/0.png'><img id='car1' src=' jeepw/1.png'><img id='car2' src=' jeepw/2.png'><img id='car3' src=' jeepw/3.png'><img id='car4' src=' jeepw/4.png'><img id='car5' src=' jeepw/5.png'><img id='car6' src=' jeepw/6.png'><img id='car7' src=' jeepw/7.png'><img id='car8' src=' jeepw/8.png'><img id='car9' src=' jeepw/9.png'><img id='car10' src=' jeepw/10.png'><img id='car11' src=' jeepw/11.png'><img id='car12' src=' jeepw/12.png'><img id='car13' src=' jeepw/13.png'><img id='car14' src=' jeepw/14.png'><img id='car15' src=' jeepw/15.png'><img id='car16' src=' jeepw/16.png'><img id='car17' src=' jeepw/17.png'><img id='car18' src=' jeepw/18.png'><img id='car19' src=' jeepw/19.png'><img id='car20' src=' jeepw/20.png'><img id='car21' src=' jeepw/21.png'><img id='car22' src=' jeepw/22.png'><img id='car23' src=' jeepw/23.png'><img id='car24' src=' jeepw/24.png'><img id='car25' src=' jeepw/25.png'><img id='car26' src=' jeepw/26.png'><img id='car27' src=' jeepw/27.png'><img id='car28' src=' jeepw/28.png'><img id='car29' src=' jeepw/29.png'><img id='car30' src=' jeepw/30.png'><img id='car31' src=' jeepw/31.png'><img id='car32' src=' jeepw/32.png'><img id='car33' src=' jeepw/33.png'><img id='car34' src=' jeepw/34.png'><img id='car35' src=' jeepw/35.png'><img id='car36' src=' jeepw/36.png'><img id='car37' src=' jeepw/37.png'><img id='car38' src=' jeepw/38.png'><img id='car39' src=' jeepw/39.png'><img id='car40' src=' jeepw/40.png'><img id='car41' src=' jeepw/41.png'>
+    
+        <img id='ned' src="ned.png">
+    </div>
+    
+    
+    
+    
+    
 
     <script>
         
@@ -38,6 +56,7 @@
         ctx.webkitImageSmoothingEnabled = false;
         ctx.msImageSmoothingEnabled     = false;
         ctx.imageSmoothingEnabled       = false;
+        
         var cars = [document.getElementById('car0'),document.getElementById('car1'),document.getElementById('car2'),document.getElementById('car3'),document.getElementById('car4'),document.getElementById('car5'),document.getElementById('car6'),document.getElementById('car7'),document.getElementById('car8'),document.getElementById('car9'),document.getElementById('car10'),document.getElementById('car11'),document.getElementById('car12'),document.getElementById('car13'),document.getElementById('car14'),document.getElementById('car15'),document.getElementById('car16'),document.getElementById('car17'),document.getElementById('car18'),document.getElementById('car19'),document.getElementById('car20'),document.getElementById('car21'),document.getElementById('car22'),document.getElementById('car23'),document.getElementById('car24'),document.getElementById('car25'),document.getElementById('car26'),document.getElementById('car27'),document.getElementById('car28'),document.getElementById('car29'),document.getElementById('car30'),document.getElementById('car31'),document.getElementById('car32'),document.getElementById('car33'),document.getElementById('car34'),document.getElementById('car35'),document.getElementById('car36'),document.getElementById('car37'),document.getElementById('car38'),document.getElementById('car39'),document.getElementById('car40'),document.getElementById('car41')];
         
         
@@ -69,14 +88,13 @@
         window.setInterval(function(){epic(); }, 0);
         function epic() {
             height = document.getElementById("height").value;
-            ctx.drawImage(ned,150,100);
             //extras
             //3d stoof
             if (i == 0) {
                 ctx.clearRect(0, 0, 200, 200);
             }
             
-            //ctx.drawImage(cars[i], 0, 0);
+            ctx.drawImage(ned,150,100);
             
             
             //start
@@ -98,7 +116,7 @@
             
             //3d stoof
             i++;
-            if (i == 42) {
+            if (i == document.getElementById("range").value) {
                 
                 i = 0;
             }
