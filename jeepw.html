@@ -26,7 +26,9 @@
         <br>
         Layers: <input type="range" min="1" max="42" value="42" id="range">
         <br>
-        Autospin<button onclick="autospintoggle()">Toggle</button>
+        Mousespin<button id="mspin" onclick="mousespintoggle()">Toggle (currently ON)</button>
+        <br>
+        Autospin<button id="aspin" onclick="autospintoggle()">Toggle (currently OFF)</button>
     </div>
     
     <canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
@@ -129,7 +131,7 @@
         }
         
         
-        c.addEventListener("mousemove", function (evt) { if (!autospin) { aim(c, evt) } }, false);
+        c.addEventListener("mousemove", function (evt) { if (mousespin) { aim(c, evt) } }, false);
         var click_x = 98;
         var click_y = 98;
         function aim(canvas, evt) {
@@ -156,16 +158,43 @@
         function autospintoggle() {
             if (autospin) {
                 autospin = false;
+                document.getElementById("aspin").innerHTML = "Toggle (currently OFF)";
             } else {
                 autospin = true;
+                document.getElementById("aspin").innerHTML = "Toggle (currently ON)";
             }
         }
         setInterval(function(){ 
             if (autospin) {
-                degrees++ 
+                degrees+=0.1;
             }
         
         }, 10);
+        
+        
+        var mousespin = true;
+        function mousespintoggle() {
+            if (mousespin) {
+                mousespin = false;
+                document.getElementById("mspin").innerHTML = "Toggle (currently OFF)";
+            } else {
+                mousespin = true;
+                document.getElementById("mspin").innerHTML = "Toggle (currently ON)";
+            }
+        }
+        
+        
+        //binds
+        window.addEventListener("keydown", binds, false);
+            function binds(e) {
+                 if (e.keyCode == "39") {
+                    //right
+                    degrees++;
+                } else if (e.keyCode == "37") {
+                    //left
+                    degrees--;
+                }
+            }
         
     </script>
 </body>
