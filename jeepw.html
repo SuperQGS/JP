@@ -25,6 +25,8 @@
         Stretch value:<input id="height" value="1">
         <br>
         Layers: <input type="range" min="1" max="42" value="42" id="range">
+        <br>
+        Autospin<button onclick="autospintoggle()">Toggle</button>
     </div>
     
     <canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
@@ -150,6 +152,20 @@
             //epic();
         }
         
+        var autospin = false;
+        function autospintoggle() {
+            if (autospin) {
+                autospin = false;
+            } else {
+                autospin = true;
+            }
+        }
+        setInterval(function(){ 
+            if (autospin) {
+                degrees++ 
+            }
+        
+        }, 10);
         
     </script>
 </body>
