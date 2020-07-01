@@ -129,7 +129,7 @@
         }
         
         
-        c.addEventListener("mousemove", function (evt) { aim(c, evt);}, false);
+        c.addEventListener("mousemove", function (evt) { if (!autospin) { aim(c, evt) } }, false);
         var click_x = 98;
         var click_y = 98;
         function aim(canvas, evt) {
